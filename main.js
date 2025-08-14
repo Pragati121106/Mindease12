@@ -135,67 +135,7 @@ function openGamesPopup() {
 
   // You can later connect each game-option to a mini-game feature or animation
 }
-let isLogin = true;
 
-function toggleForm() {
-  isLogin = !isLogin;
-  document.getElementById("form-title").innerText = isLogin ? "Login" : "Sign Up";
-  document.querySelector(".form-box button").innerText = isLogin ? "Login" : "Sign Up";
-  document.getElementById("toggle-text").innerHTML = isLogin
-    ? "Don't have an account? <a href='#' onclick='toggleForm()'>Sign up</a>"
-    : "Already have an account? <a href='#' onclick='toggleForm()'>Login</a>";
-}
-
-function handleAuth() {
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  if (!username || !password) {
-    alert("Please enter username and password");
-    return;
-  }
-
-  let users = JSON.parse(localStorage.getItem("users") || "[]");
-
-  if (isLogin) {
-    // Login
-    const user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-      localStorage.setItem("loggedInUser", username);
-      window.location.href = "home.html";
-    } else {
-      alert("Invalid username or password");
-    }
-  } else {
-    // Signup
-    if (users.some(u => u.username === username)) {
-      alert("Username already exists");
-      return;
-    }
-    users.push({ username, password });
-    localStorage.setItem("users", JSON.stringify(users));
-    alert("Account created successfully! You can now log in.");
-    toggleForm();
-  }
-}
-
-// Protect home.html
-if (window.location.pathname.endsWith("home.html")) {
-  const loggedInUser = localStorage.getItem("loggedInUser");
-  if (!loggedInUser) {
-    window.location.href = "index.html";
-  }
-}
-
-// Personalize home page with logged in user
-if (window.location.pathname.endsWith("home.html")) {
-  const loggedInUser = localStorage.getItem("loggedInUser");
-  if (!loggedInUser) {
-    window.location.href = "index.html"; // redirect if not logged in
-  } else {
-    document.getElementById("username-placeholder").innerText = loggedInUser;
-  }
-}
 
 // Profile page protection & display
 if (window.location.pathname.endsWith("profile.html")) {
@@ -274,5 +214,6 @@ function logout() {
 
     alert("Mood saved successfully!");
   });
+
 
 
