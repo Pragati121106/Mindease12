@@ -277,14 +277,6 @@
 </div>
 
 <script>
-  const loggedInUser = localStorage.getItem("loggedInUser");
-  if (!loggedInUser) {
-    window.location.href = "index.html";
-  } else {
-    document.getElementById("profile-username").innerText = loggedInUser;
-    document.getElementById("avatar-initials").firstChild.textContent = loggedInUser.charAt(0).toUpperCase();
-  }
-
   // Load and display mood history
   let moodHistory = JSON.parse(localStorage.getItem(loggedInUser + "_moods")) || [];
   document.getElementById("stat-mood").innerText = moodHistory.length;
@@ -308,8 +300,7 @@
   });
 
   function logout() {
-    localStorage.removeItem("loggedInUser");
-    window.location.href = "index.html";
+    alert("coming soon");
   }
   function changeAvatar() {
     alert("Avatar upload feature coming soon!");
@@ -321,6 +312,7 @@
 
 </body>
 </html>
+
 
 
 
